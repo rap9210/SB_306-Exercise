@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>New Song Entry</h3>
+
+    <form th:action="@{/processSong}" th:object="${song}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+
+        Title: <input type="text" th:field="*{songTitle}" />
+        <span th:if="${#fields.hasErrors('songTitle')}" th:errors="*{songTitle}"></span><br>
+
+        <select th:field="*{album}">
+
+            <option th:each="album: ${albums}" th:value="${album.id}" th:text="${album.title}"></option>
+
+        </select>
+
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
